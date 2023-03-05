@@ -4,9 +4,11 @@
 
 <template>
   <q-page padding>
-    <BaseText tag="h1"> Encontre o seu personagem favorito! </BaseText>
+    <BaseText tag="h2"> Encontre o seu personagem favorito! </BaseText>
 
-    <BaseCharacterCard />
+    <section class="row justify-around">
+      <BaseCharacterCard />
+    </section>
 
     <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
       <q-btn fab icon="keyboard_arrow_up" class="top-btn" />
