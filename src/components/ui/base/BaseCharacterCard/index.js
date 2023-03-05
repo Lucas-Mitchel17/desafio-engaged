@@ -1,0 +1,1 @@
+export { default as BaseCharacterCard } from './BaseCharacterCard.vue';
