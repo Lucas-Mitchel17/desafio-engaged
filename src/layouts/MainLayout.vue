@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr fFf">
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>
@@ -12,7 +12,6 @@
           round
           icon="menu"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
         />  
       </q-toolbar>
     </q-header>
