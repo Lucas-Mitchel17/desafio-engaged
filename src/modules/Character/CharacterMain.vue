@@ -2,6 +2,8 @@
 import { BaseText } from "src/components/ui/base";
 import { ref } from "vue";
 
+import { RouterLink } from "vue-router";
+
 import { CharacterTab, EpisodeTab } from "./tabs";
 
 const tab = ref("character");
@@ -10,12 +12,13 @@ const characterInfos = ref({
   id: 1,
   name: "Rick Sanchez",
 });
-
 </script>
 
 <template>
   <q-page padding>
-    <q-btn class="btn-back" icon="arrow_back" label="Back" />
+    <RouterLink to="/characters-list">
+      <q-btn class="btn is-back" icon="arrow_back" label="Back to List" />
+    </RouterLink>
 
     <BaseText tag="h1">{{ characterInfos.name }}</BaseText>
 
@@ -47,7 +50,6 @@ const characterInfos = ref({
           <q-tab-panel name="episodes">
             <EpisodeTab />
           </q-tab-panel>
-
         </q-tab-panels>
       </q-card>
     </section>
@@ -55,19 +57,18 @@ const characterInfos = ref({
 </template>
 
 <style lang="scss" scoped>
-.character-hero{ 
+.character-hero {
   margin-top: 40px;
   .c-infos {
     align-items: center;
     display: flex;
     flex-direction: column;
     margin: 25px auto;
-  
+
     @media (min-width: $md) {
       flex-direction: row;
       margin: 0;
     }
   }
 }
-
 </style>
