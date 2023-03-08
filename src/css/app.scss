@@ -1,8 +1,23 @@
 // app global css in SCSS form
-@import url('https://fonts.googleapis.com/css2?family=Mynerve&family=Titillium+Web:wght@200;300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mynerve&family=Titillium+Web:wght@200;300;400;600;700&display=swap");
 
 body {
-  font-family: 'Mynerve', cursive;
+  font-family: "Mynerve", cursive;
+}
+
+input[type="text"] {
+  color: $brown;
+  font-size: 25px;
+}
+
+.q-field__messages {
+  font-size: 18px;
+  color: $brown;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 p {
@@ -16,20 +31,58 @@ p {
 }
 
 // Buttons
-.btn-back {
-  color: $blue;
+.btn {
+  color: var(--color);
   font-weight: 700;
-  border: 2px solid $blue;
-  background-image: -webkit-linear-gradient(45deg, $lightGreen 50%, transparent 50%);
-  background-image: linear-gradient(45deg, $lightGreen 50%, transparent 50%);
+  border: 2px solid var(--border-color);
+  background-image: -webkit-linear-gradient(
+    45deg,
+    var(--back-color) 50%,
+    transparent 50%
+  );
+  background-image: linear-gradient(
+    45deg,
+    var(--back-color) 50%,
+    transparent 50%
+  );
   background-position: 100%;
   background-size: 400%;
   -webkit-transition: background 300ms ease-in-out;
   transition: background 300ms ease-in-out;
 
-  &:hover {
-    background-position: 0;
-    color: white;
-    border-color: $lightGreen;
+  &.is-green {
+    --color: #{$blue};
+    --border-color: #{$blue};
+    --back-color: #{$lightGreen};
+
+    &:hover {
+      background-position: 0;
+      border-color: $lightGreen;
+      color: white;
+    }
   }
- }
+
+  &.is-yellow {
+    --color: #{$brown};
+    --border-color: #{$brown};
+    --back-color: #{$yellow};
+
+    &:hover {
+      background-position: 0;
+      border-color: $yellow;
+      color: $blue;
+    }
+  }
+
+  &.is-back {
+    --color: #{$red};
+    --border-color: #{$red};
+    --back-color: #{$red};
+
+    &:hover {
+      background-position: 0;
+      border-color: $red;
+      color: white;
+    }
+  }
+}
