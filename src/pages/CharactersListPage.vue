@@ -1,24 +1,11 @@
 <script setup>
-  import { BaseCharacterCard, BaseText } from 'src/components/ui/base';
+import { CharacterListMain } from "src/modules/CharacterList";
 </script>
 
 <template>
   <q-page padding>
-    <BaseText tag="h2"> Encontre o seu personagem favorito! </BaseText>
-
-    <section class="row justify-around">
-      <BaseCharacterCard />
-    </section>
-
-    <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
-      <q-btn fab icon="keyboard_arrow_up" class="top-btn" />
-    </q-page-scroller>
+    <CharacterListMain />
   </q-page>
 </template>
 
-<style lang="scss">
-.top-btn {
-  background-color: $lightGreen;
-  color: white;
-}
-</style>
+<style lang="scss"></style>
