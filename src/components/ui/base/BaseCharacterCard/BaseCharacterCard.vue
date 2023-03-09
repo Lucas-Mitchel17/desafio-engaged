@@ -45,6 +45,7 @@ const props = defineProps({
   margin-bottom: 40px;
 
   &-item {
+    margin-right: 20px;
     max-width: 300px;
     width: 100%;
 

@@ -5,6 +5,8 @@ import { ref } from "vue";
 
 const name = ref("");
 
+const current = ref(1);
+
 const character = ref([
   {
     id: 1,
@@ -107,7 +109,7 @@ const character = ref([
       class="input"
     />
 
-    <section class="row justify-between">
+    <section class="row justify-center">
       <BaseCharacterCard
         v-for="characters in character"
         :key="characters"
@@ -117,6 +119,17 @@ const character = ref([
         :name="characters.name"
       />
     </section>
+
+    <div class="flex flex-center">
+      <q-pagination
+        v-model="current"
+        color="teal"
+        :max="10"
+        :max-pages="5"
+        :ellipses="false"
+        :boundary-numbers="false"
+      />
+    </div>
   </q-page>
 </template>
 
