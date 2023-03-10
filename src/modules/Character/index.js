@@ -1,1 +1,1 @@
-export { default as CharacterMain } from './CharacterMain.vue';
+export { default as CharacterMain } from "./CharacterMain.vue";

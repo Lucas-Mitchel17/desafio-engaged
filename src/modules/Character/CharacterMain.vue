@@ -1,26 +1,30 @@
 <script setup>
-import { BaseText } from "src/components/ui/base";
+import { BaseText, BaseLoader } from "src/components/ui/base";
 import { ref } from "vue";
 
 import { RouterLink } from "vue-router";
 
 import { CharacterTab, EpisodeTab } from "./tabs";
 
-const tab = ref("character");
+const props = defineProps({
+  character: {
+    required: true,
+    type: Object,
+  },
 
-const characterInfos = ref({
-  id: 1,
-  name: "Rick Sanchez",
+  loading: Boolean,
 });
+
+const tab = ref("character");
 </script>
 
 <template>
   <q-page padding>
-    <RouterLink to="/characters-list">
+    <RouterLink to="/characters-list/1">
       <q-btn class="btn is-back" icon="arrow_back" label="Back to List" />
     </RouterLink>
 
-    <BaseText tag="h1">{{ characterInfos.name }}</BaseText>
+    <BaseText tag="h1">{{ character.name }}</BaseText>
 
     <q-separator />
 
@@ -28,12 +32,12 @@ const characterInfos = ref({
       <q-card>
         <q-tabs
           v-model="tab"
+          align="justify"
           dense
           class="text-grey"
           active-color="teal"
           indicator-color="teal"
           inline-label
-          align="justify"
           narrow-indicator
         >
           <q-tab name="character" icon="person" label="Character" />
@@ -44,11 +48,19 @@ const characterInfos = ref({
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="character" class="c-infos">
-            <CharacterTab />
+            <div v-if="loading" class="flex row justify-center">
+              <BaseLoader />
+            </div>
+
+            <CharacterTab v-else :character="character" />
           </q-tab-panel>
 
           <q-tab-panel name="episodes">
-            <EpisodeTab />
+            <div v-if="loading" class="flex row justify-center">
+              <BaseLoader />
+            </div>
+
+            <EpisodeTab v-else :episodes="character.episode" />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>

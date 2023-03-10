@@ -2,83 +2,12 @@
 import { BaseText } from "components/ui/base";
 import { ref } from "vue";
 
-const episode = ref([
-  {
-    id: "1",
-    name: "Pilot",
-    air_date: "December 2, 2013",
-    episode: "S01E01",
+defineProps({
+  episodes: {
+    type: Array,
+    required: true,
   },
-  {
-    id: "1",
-    name: "Name ep 2",
-    air_date: "December 2, 2013",
-    episode: "S01E01",
-  },
-  {
-    id: "1",
-    name: "Name ep 3",
-    air_date: "December 2, 2013",
-    episode: "S01E01",
-  },
-  {
-    id: "1",
-    name: "Name ep 4",
-    air_date: "December 2, 2013",
-    episode: "S01E01",
-  },
-]);
-
-const character = ref([
-  {
-    name: "Rick Sanchez",
-  },
-  {
-    name: "Morty Smith",
-  },
-  {
-    name: "Bepisian",
-  },
-  {
-    name: "Beth Smith",
-  },
-  {
-    name: "Canklanker Thom",
-  },
-  {
-    name: "Davin",
-  },
-  {
-    name: "Frank Palicky",
-  },
-  {
-    name: "Glenn",
-  },
-  {
-    name: "Hookah Alien",
-  },
-  {
-    name: "Jerry Smith",
-  },
-  {
-    name: "Jessica",
-  },
-  {
-    name: "Jessica's Friend",
-  },
-  {
-    name: "Mr. Goldenfold",
-  },
-  {
-    name: "Mrs. Sanchez",
-  },
-  {
-    name: "Principal Vagina",
-  },
-  {
-    name: "Summer Smith",
-  },
-]);
+});
 
 const slide = ref(0);
 </script>
@@ -86,7 +15,7 @@ const slide = ref(0);
 <template>
   <div class="episode-tab">
     <BaseText class="episode-count" tag="h3">
-      All episode appearences: {{ episode.length }}</BaseText
+      All episode appearences: {{ episodes.length }}</BaseText
     >
     <BaseText class="episode-info" tag="h4">
       Click on arrow to see the next episode *</BaseText
@@ -105,19 +34,19 @@ const slide = ref(0);
       <q-carousel-slide
         :name="index"
         class="column no-wrap flex-center"
-        v-for="(episodes, index) in episode"
-        :key="episodes.id"
+        v-for="({ name, episode, air_date, characters }, index) in episodes"
+        :key="name"
       >
         <q-card class="episode-card">
           <q-card-section>
             <BaseText class="card-title" tag="p"
-              >Ep name: <span>{{ episodes.name }}</span></BaseText
+              >Ep name: <span>{{ name }}</span></BaseText
             >
             <BaseText class="card-title" tag="p"
-              >Ep number: <span>{{ episodes.episode }}</span></BaseText
+              >Ep number: <span>{{ episode }}</span></BaseText
             >
             <BaseText class="card-title" tag="p"
-              >Air date: <span>{{ episodes.air_date }}</span></BaseText
+              >Air date: <span>{{ air_date }}</span></BaseText
             >
 
             <q-expansion-item
@@ -128,10 +57,10 @@ const slide = ref(0);
               <BaseText
                 class="card-title card-expand-name"
                 tag="p"
-                v-for="characters in character"
-                :key="characters"
+                v-for="character in characters"
+                :key="character.name"
               >
-                Name: <span>{{ characters.name }}</span>
+                Name: <span>{{ character.name }}</span>
               </BaseText>
             </q-expansion-item>
           </q-card-section>
