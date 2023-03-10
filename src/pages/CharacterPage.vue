@@ -17,20 +17,15 @@ if (!ROUTE.params.id) {
 const { loading, result, error } = useQuery(QUERY, { id: ROUTE.params.id });
 
 const character = computed(() => result?.value?.character ?? {});
-
-const showCharacters = computed(() => {
-  return !error.value && character && character.value.name;
-});
 </script>
 
 <template>
   <q-page padding>
-    <CharacterMain
-      v-if="showCharacters"
-      :character="character"
-      :loading="loading"
+    <BaseMessageError
+      v-if="!loading && (error || !character.name)"
+      error-message="Character Not Found"
     />
 
-    <BaseMessageError v-else error-message="Character Not Found" />
+    <CharacterMain v-else :character="character" :loading="loading" />
   </q-page>
 </template>
