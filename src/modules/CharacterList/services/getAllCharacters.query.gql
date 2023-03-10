@@ -1,0 +1,17 @@
+query GET_ALL_CHARACTERS($name: String, $page: Int) {
+  characters(filter: { name: $name }, page: $page) {
+    info {
+      count
+      pages
+      next
+      prev
+    }
+    results {
+      id
+      name
+      status
+      species
+      image
+    }
+  }
+}

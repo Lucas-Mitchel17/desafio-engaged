@@ -1,94 +1,32 @@
 <script setup>
+import { computed } from "vue";
 import { RouterLink } from "vue-router";
-import { BaseCharacterCard, BaseText } from "src/components/ui/base";
-import { ref } from "vue";
+import {
+  BaseCharacterCard,
+  BaseText,
+  BaseLoader,
+} from "src/components/ui/base";
 
-const name = ref("");
+const emit = defineEmits(["update:modelValue"]);
 
-const current = ref(1);
+const props = defineProps({
+  loading: Boolean,
 
-const character = ref([
-  {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    location: {
-      name: "Citadel of Ricks",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+  characters: {
+    required: true,
+    type: Object,
   },
-  {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    location: {
-      name: "Citadel of Ricks",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+
+  modelValue: {
+    required: true,
+    type: String,
   },
-  {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    location: {
-      name: "Citadel of Ricks",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  },
-  {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    location: {
-      name: "Citadel of Ricks",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  },
-  {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    location: {
-      name: "Citadel of Ricks",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  },
-  {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    location: {
-      name: "Citadel of Ricks",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  },
-  {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    location: {
-      name: "Citadel of Ricks",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  },
-  {
-    id: 1,
-    name: "Rick Sanchez",
-    status: "Alive",
-    species: "Human",
-    location: {
-      name: "Citadel of Ricks",
-    },
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  },
-]);
+});
+
+const model = computed({
+  get: () => props.modelValue,
+  set: (state) => emit("update:modelValue", state),
+});
 </script>
 
 <template>
@@ -100,8 +38,8 @@ const character = ref([
     <BaseText tag="h2"> Find your favorite character! </BaseText>
 
     <q-input
+      v-model="model"
       outlined
-      v-model="name"
       label="Character Name *"
       hint="Name and surname to be more especifique"
       lazy-rules
@@ -109,27 +47,21 @@ const character = ref([
       class="input"
     />
 
-    <section class="row justify-center">
+    <div v-if="loading" class="flex row justify-center">
+      <BaseLoader />
+    </div>
+
+    <section v-else class="row justify-center">
       <BaseCharacterCard
-        v-for="characters in character"
-        :key="characters"
-        :scr-image="characters.image"
-        :status="characters.status"
-        :species="characters.species"
-        :name="characters.name"
+        v-for="{ id, image, status, species, name } in characters"
+        :key="id"
+        :scr-image="image"
+        :status="status"
+        :species="species"
+        :name="name"
+        :href="`/character/${id}`"
       />
     </section>
-
-    <div class="flex flex-center">
-      <q-pagination
-        v-model="current"
-        color="teal"
-        :max="10"
-        :max-pages="5"
-        :ellipses="false"
-        :boundary-numbers="false"
-      />
-    </div>
   </q-page>
 </template>
 
