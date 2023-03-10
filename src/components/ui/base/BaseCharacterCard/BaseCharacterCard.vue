@@ -6,6 +6,7 @@ const props = defineProps({
   name: String,
   status: String,
   species: String,
+  href: String,
 });
 </script>
 
@@ -32,7 +33,7 @@ const props = defineProps({
       </q-card-section>
 
       <q-card-actions>
-        <router-link to="/character" class="full-width">
+        <router-link :to="href" class="full-width">
           <q-btn flat label="Show more..." class="btn is-green full-width" />
         </router-link>
       </q-card-actions>
@@ -48,6 +49,10 @@ const props = defineProps({
     margin-right: 20px;
     max-width: 300px;
     width: 100%;
+
+    .text-h4 {
+      height: 35px;
+    }
 
     .text-h4,
     .sub-item {
