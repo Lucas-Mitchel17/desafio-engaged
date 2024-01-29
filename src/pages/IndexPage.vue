@@ -3,7 +3,7 @@ import { BaseText } from "src/components/ui/base";
 </script>
 
 <template>
-  <div class="home-hero flex column justify-center items-center">
+  <div class="home-hero h-screen flex column justify-center items-center">
     <BaseText tag="h1">
       Welcome to <span class="rick">Rick</span> and<span class="morty">
         Morty's</span
@@ -28,6 +28,7 @@ import { BaseText } from "src/components/ui/base";
 
 <style lang="scss" scoped>
 .home-hero {
+  height: 100vh;
   .text-h1 {
     text-align: center;
     margin-bottom: 50px;
